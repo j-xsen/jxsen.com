@@ -26,13 +26,14 @@ export class LetterMesh extends THREE.Mesh {
 
         this.delay = Math.floor(Math.random() * 100)
         this.speed = 0.75
-        this.anim_bouncey = 0
+        this.anim_bouncey = this.delay
         this.anim_bouncey_goingIn = true
 
-        this.base_y_position = - ( line * 25 )
+        this.base_y_position = 15 - ( line * 40 )
 
-        this.position.x = -25 + charPosition * 14
-        this.position.z = -75
+        this.position.x = -50 + charPosition * 14
+        this.position.z = -150
+        this.scale.y = 1.5
         this.position.y = this.base_y_position
         this.rotation.y = ( this.delay * 0.0015 )
     }
@@ -49,8 +50,8 @@ export class LetterMesh extends THREE.Mesh {
         }
         this.anim_bouncey += this.anim_bouncey_goingIn ? 0.25*this.speed*multiplier : -0.25*this.speed*multiplier
         this.position.y = - ( this.anim_bouncey * Math.sin(0.025) ) + this.base_y_position
-        
-        this.rotation.y = (this.anim_bouncey / 200)
+        this.scale.y = 1.5 + (this.anim_bouncey / 198)
+        this.rotation.y = (this.anim_bouncey / 198)
     }
 
     animate() {
