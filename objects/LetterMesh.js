@@ -10,7 +10,7 @@ class Letter extends TextGeometry {
             depth: 0,
             curveSegments: 1,
             bevelEnabled: true,
-            bevelThickness: 0,
+            bevelThickness: 1,
             bevelSize: 0.25,
             bevelOffset: 0.5,
             bevelSegments: 1
@@ -40,10 +40,10 @@ export class LayeredLetterMesh {
     constructor (char, font, charPosition=0, line=0) {
         const delay = Math.floor(Math.random() * 100)
         this.anim_bouncey = 0
-        this.anim_bouncey_goingIn = true
+        this.animIn = true
         this.speed = 1.25
-        let outer_material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true } )
-        let inner_material = new THREE.MeshPhongMaterial( { color: 0x000000, flatShading: true } )
+        let outer_material = new THREE.MeshBasicMaterial( { color: 0xffff00 } )
+        let inner_material = new THREE.MeshBasicMaterial( { color: 0x000000 } )
         this.outer = new LetterMesh(char, font, outer_material, delay, charPosition, line, 0)
         this.inner = new LetterMesh(char, font, inner_material, delay, charPosition, line, 1)
     }
@@ -67,29 +67,36 @@ export class LayeredLetterMesh {
     }
 
     progressColor() {
-        // this.outer.material.color.setRGB(0, 0, 1)
-        // this.outer.material.color.setRGB(0, 0, 0)
-        // this.inner.material.color.setRGB(0, 0, 0)
-        // this.inner.material.color.setRGB(1, 0, 0)
+        this.outer.material.color.setRGB(1,
+                                         0,
+                                         (this.anim_bouncey/100))
+        this.inner.material.color.setRGB(0,
+                                         this.anim_bouncey/100,
+                                         1 - (this.anim_bouncey/100))
     }
 
     progressRotation() {
-        this.outer.rotation.y = (this.anim_bouncey / 198)
-        this.inner.rotation.y = (this.anim_bouncey / 198)
+        const rotation = 1- (this.anim_bouncey/100)
+        this.outer.rotation.y = rotation
+        this.inner.rotation.y = rotation
     }
 
     progress() {
-        if ( this.anim_bouncey > 99 ) {
-            this.anim_bouncey_goingIn = false
-        } else if ( this.anim_bouncey < -99 ) {
-            this.anim_bouncey_goingIn = true
+        if ( this.anim_bouncey >= 99 ) {
+            this.animIn = false
+        } else if ( this.anim_bouncey <= 0 ) {
+            this.animIn = true
         }
-
         let multiplier = 1
         if ( this.anim_bouncey < 75 || this.anim_bouncey > -75 ) {
             multiplier = 2
         }
-        this.anim_bouncey += this.anim_bouncey_goingIn ? 0.25*this.speed*multiplier : -0.25*this.speed*multiplier
+
+        if ( this.animIn ) {
+            this.anim_bouncey += 0.25*this.speed*multiplier
+        } else {
+            this.anim_bouncey -= 0.25*this.speed*multiplier
+        }
     }
 
     animate() {

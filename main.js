@@ -41,10 +41,6 @@ function init() {
     
         camera.position.z = 5
 
-    const dirLight = new THREE.DirectionalLight( 0xffffff, 1 );
-    dirLight.position.set( 0, 0, 1 ).normalize();
-    scene.add( dirLight );
-
     loader = new FontLoader()
     loader.load("helvetiker_regular.typeface.json", function ( font ) {
         jaxsen_mesh = new WordMesh(font, ",Jaxsen Honeycutt")
