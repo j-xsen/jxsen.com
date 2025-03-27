@@ -2,7 +2,7 @@
   "name": "jxsen",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,8 +11,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.6.3",
+  "packageManager": "pnpm@10.7.0",
   "dependencies": {
+    "@react-three/drei": "^10.0.5",
+    "@react-three/fiber": "^9.1.0",
+    "@types/three": "^0.174.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "three": "^0.174.0"
   },
   "devDependencies": {

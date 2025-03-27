@@ -7,13 +7,7 @@ class Letter extends TextGeometry {
         super(char, {
             font: response,
             size: 15,
-            depth: 0,
-            curveSegments: 1,
-            bevelEnabled: true,
-            bevelThickness: 1,
-            bevelSize: 0.25,
-            bevelOffset: 0.5,
-            bevelSegments: 1
+            bevelEnabled: false
         })
     }
 }
