@@ -5,10 +5,10 @@ extend({ TextGeometry })
 export default function LetterMesh(props) {
     console.log(props.letter, props.charPos)
     return (
-        <mesh>
+        <mesh position={[(props.charPos*0.75), props.line * -1, -2]}>
             <textGeometry args={[props.letter,
                 { font: props.font,
-                size: 1,
+                size: 1.25,
                 depth: 0,
                 curveSegments: 1,
                 bevelEnabled: false }]} />
