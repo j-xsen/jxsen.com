@@ -1,4 +1,4 @@
-import { LetterMesh } from './LetterMesh.js'
+import { LayeredLetterMesh, LetterMesh } from './LetterMesh.js'
 
 export default class WordMesh {
     constructor(font, word, material) {
@@ -18,14 +18,15 @@ export default class WordMesh {
                 afterSpace = i+1
                 continue
             }
-            const letter = new LetterMesh(this.word[i], this.font, this.material, afterSpace == 0 ? i : i - afterSpace, afterSpace == 0 ? 0 : 1)
+            let letter = new LayeredLetterMesh(this.word[i], this.font, afterSpace == 0 ? i : i - afterSpace, afterSpace == 0 ? 0 : 1)
             this.letters.push(letter)
         }
     }
 
     addToScene(scene) {
         this.letters.forEach( letter => {
-            scene.add(letter)
+            scene.add(letter.outer)
+            scene.add(letter.inner)
         })
     }
 
