@@ -3,7 +3,6 @@ import { TextGeometry } from "three/addons/geometries/TextGeometry.js"
 extend({ TextGeometry })
 
 export default function LetterMesh(props) {
-    console.log(props.letter, props.charPos)
     return (
         <mesh position={[(props.charPos*0.75), props.line * -1, -2]}>
             <textGeometry args={[props.letter,

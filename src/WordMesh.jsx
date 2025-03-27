@@ -1,7 +1,6 @@
-import { extend } from "@react-three/fiber"
-import React from "react"
-import LetterMesh from "./LetterMesh";
-import { Box3, Object3D, Vector3 } from "three";
+import { useEffect, useRef } from "react"
+import LetterMesh from "./LetterMesh"
+import { Box3, Vector3 } from "three"
 
 export default function WordMesh(props) {
     const centerAlign = (wordGroup) => {
@@ -9,7 +8,7 @@ export default function WordMesh(props) {
         const size = new Vector3()
         boundingBox.getSize(size)
         wordGroup.position.x = - (size.x / 2)
-        return wordGroup;
+        return wordGroup
     };
 
     const populateWord = () => {
@@ -38,13 +37,13 @@ export default function WordMesh(props) {
         return <group name="WordGroup" ref={groupRef}>{letters}</group>
     }
 
-    const groupRef = React.useRef(); // Create a ref for the group
+    const groupRef = useRef()
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (groupRef.current) {
-            centerAlign(groupRef.current); // Pass the group to centerAlign
+            centerAlign(groupRef.current)
         }
-    }, [groupRef]);
+    }, [groupRef])
 
-    return populateWord();
+    return populateWord()
 }
