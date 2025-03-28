@@ -3,7 +3,6 @@ import { OrbitControls } from "@react-three/drei"
 import { FontLoader } from "three/addons/loaders/FontLoader.js"
 import WordMesh from "./WordMesh"
 import helvetiker from "../helvetiker_regular.typeface.json"
-import LinkSphere from "./LinkSphere"
 extend({ OrbitControls })
 
 export default function App() {
@@ -12,12 +11,10 @@ export default function App() {
         <Canvas camera={{ position: [0, 0, 5], fov: 90 }}>
 
         <WordMesh font={font} word=",Jaxsen Honeycutt" />
-
-        <LinkSphere position={[0, 0, 0]} />
         
         <OrbitControls/>
 
-        <color attach="background" args={["orange"]} />
+        <color attach="background" args={["black"]} />
 
         </Canvas>
     )

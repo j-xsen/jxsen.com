@@ -39,6 +39,7 @@ export default function WordMesh(props) {
         return <group name="WordGroup" ref={groupRef}>{letters}</group>
     }
 
+    let maxFrames = 100
     let frameCount = 0
     let frameIn = true
     useFrame(() => {
@@ -52,7 +53,12 @@ export default function WordMesh(props) {
             frameIn ? frameCount++ : frameCount--
 
             groupRef.current.children.forEach(element => {
+                // inner
                 element.children[1].position.z += frameIn ? 0.0025 : -0.0025
+                element.children[1].material.color.setRGB(0, frameCount/maxFrames, 1-(frameCount/100))
+
+                // outer
+                element.children[0].material.color.setRGB(1, 0, frameCount/maxFrames)
             });
         }
     })
