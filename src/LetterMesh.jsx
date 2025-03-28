@@ -8,9 +8,9 @@ export default function LetterMesh(props) {
     }
 
     const getPosition = () => {
-        return [props.charPos + (getIsInner() ? 0.1 : 0),
-            -props.line + (getIsInner() ? 0.1 : 0),
-            getIsInner() ? -2 : -1.9]
+        return [props.charPos,
+            props.offset-props.line + (getIsInner() ? 0.1 : 0),
+            (getIsInner() ? props.offset : 0) + 2 + (getIsInner() ? -2 : -1.9)]
     }
 
     return (

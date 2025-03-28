@@ -17,7 +17,7 @@ export default function App() {
         
         <OrbitControls/>
 
-        <color attach="background" args={["black"]} />
+        <color attach="background" args={["orange"]} />
 
         </Canvas>
     )

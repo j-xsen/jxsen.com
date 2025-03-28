@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react"
 import LetterMesh from "./LetterMesh"
 import { useFrame } from "@react-three/fiber"
 import { Box3, Vector3 } from "three"
+import LayeredLetterMesh from "./LayeredLetterMesh"
 
 export default function WordMesh(props) {
     const groupRef = useRef()
@@ -25,22 +26,13 @@ export default function WordMesh(props) {
             }
 
             return (
-                <group key={index}>
-                    <LetterMesh
-                        letter={letter}
-                        font={props.font}
-                        charPos={index - splitIndex}
-                        line={splitIndex ? 1 : 0 }
-                        color="black"
-                    />
-                    <LetterMesh
+                    <LayeredLetterMesh
+                        key={index}
                         letter={letter}
                         font={props.font}
                         charPos={index - splitIndex}
                         line={splitIndex ? 1 : 0}
-                        color="white"
-                    />
-                </group>
+                />
             )
         })
 
@@ -51,13 +43,17 @@ export default function WordMesh(props) {
     let frameIn = true
     useFrame(() => {
         if (groupRef.current) {
-            if ( frameCount >= 100 ) {
+            if ( frameCount >= 73 ) {
                 frameIn = false
             } else if ( frameCount <= 0 ) {
                 frameIn = true
             }
             groupRef.current.position.z += frameIn ? 0.01 : -0.01
             frameIn ? frameCount++ : frameCount--
+
+            groupRef.current.children.forEach(element => {
+                element.children[1].position.z += frameIn ? 0.0025 : -0.0025
+            });
         }
     })
 
