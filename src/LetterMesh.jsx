@@ -3,14 +3,29 @@ import { TextGeometry } from "three/addons/geometries/TextGeometry.js"
 extend({ TextGeometry })
 
 export default function LetterMesh(props) {
+    const getIsInner = () => {
+        return props.color === "white" || false
+    }
+
+    const getPosition = () => {
+        return [props.charPos + (getIsInner() ? 0.1 : 0),
+            -props.line + (getIsInner() ? 0.1 : 0),
+            getIsInner() ? -2 : -1.9]
+    }
+
     return (
-        <mesh position={[(props.charPos*0.75), props.line * -1, -2]}>
+        <mesh position={getPosition()}>
             <textGeometry args={[props.letter,
                 { font: props.font,
-                size: 1.25,
-                depth: 0,
+                size: getIsInner() ? 1.25 : 1.5,
+                depth: getIsInner() ? 0.3 : 0.1,
                 curveSegments: 1,
-                bevelEnabled: false }]} />
+                bevelEnabled: !getIsInner(),
+                bevelThickness: .05,
+                bevelSize: 0.25,
+                bevelOffset: 0,
+                bevelSegments: 2,
+                }]} />
             <meshBasicMaterial color={props.color} />
         </mesh>
     )

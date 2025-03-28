@@ -23,14 +23,22 @@ export default function WordMesh(props) {
             }
 
             return (
-                <LetterMesh
-                    key={index}
-                    letter={letter}
-                    font={props.font}
-                    charPos={index - splitIndex}
-                    line={splitIndex ? 1 : 0}
-                    color="white"
-                />
+                <group key={index}>
+                    <LetterMesh
+                        letter={letter}
+                        font={props.font}
+                        charPos={index - splitIndex}
+                        line={splitIndex ? 1 : 0 }
+                        color="black"
+                    />
+                    <LetterMesh
+                        letter={letter}
+                        font={props.font}
+                        charPos={index - splitIndex}
+                        line={splitIndex ? 1 : 0}
+                        color="white"
+                    />
+                </group>
             )
         })
 
