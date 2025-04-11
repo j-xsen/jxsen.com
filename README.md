@@ -1,5 +1,5 @@
-# jxsen
+# jxsen.com
 
 Website built with React Three Fiber
 
-https://jaxsen.netlify.app/
+https://jxsen.com/
