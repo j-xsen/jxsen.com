@@ -13,12 +13,15 @@ export function GithubLogo({position}) {
   const [hovered, setHovered] = React.useState(false)
   const { nodes } = useGLTF('/models/githublogo-transformed.glb')
 
+  const defaultScale = 0.75
+  const hoveredScale = 0.8
+
   useFrame(() => {
     mesh.current.rotation.y += 0.015
   })
 
   return (
-    <group dispose={null} position={position} scale={0.75} ref={mesh}
+    <group dispose={null} position={position} scale={hovered ? hoveredScale : defaultScale} ref={mesh}
       onPointerOver={(event) => setHovered(true)}
       onPointerOut={(event) => setHovered(false)}
       onClick={()=>window.open("https://github.com/j-xsen", "_blank")}>
