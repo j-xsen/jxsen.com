@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useLayoutEffect, useRef } from "react"
 import LetterMesh from "./LetterMesh"
 import { useFrame } from "@react-three/fiber"
 import { Box3, Vector3 } from "three"
@@ -11,6 +11,11 @@ export default function WordMesh(props) {
         const boundingBox = new Box3().setFromObject(wordGroup)
         const center = new Vector3()
         boundingBox.getCenter(center)
+
+        if (props.center){
+            center.add(props.center)
+        }
+
         wordGroup.position.sub(center)
     };
 
@@ -63,7 +68,7 @@ export default function WordMesh(props) {
         }
     })
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (groupRef.current) {
             centerAlign(groupRef.current)
         }

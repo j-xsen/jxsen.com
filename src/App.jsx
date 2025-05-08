@@ -5,6 +5,7 @@ import WordMesh from "./WordMesh"
 import helvetiker from "../helvetiker_regular.typeface.json"
 import { GithubLogo } from "./models/GithubLogo"
 import { JaxsenvilleSign } from "./models/JaxsenvilleSign"
+import { Email } from "./models/Email"
 extend({ OrbitControls })
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
         <GithubLogo position={[0,6,-5]}/>
         <directionalLight position={[0, 4, 10]} intensity={0.75} color={[1, 1, 1]} />
         <JaxsenvilleSign position={[0,-5,0]} rotation={[24.75,0,0]} scale={0.65} />
+        <Email position={[-6,5,-2.5]} font={font} rotation={[0, 100, 50]} scale={0.75}/>
         
         <OrbitControls/>
 
