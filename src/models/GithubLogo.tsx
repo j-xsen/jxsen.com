@@ -5,35 +5,47 @@ Files: githublogo.glb [20.01KB] > Z:\art\models\githublogo\githublogo-transforme
 */
 
 import React from 'react'
-import { useGLTF } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
+import {useGLTF} from '@react-three/drei'
+import {ObjectMap, useFrame} from '@react-three/fiber'
+import {GLTF} from "three-stdlib";
+import {MeshStandardMaterial, Mesh} from "three";
+import {Position} from "../types/Transformation";
 
-export function GithubLogo({position}) {
-  const mesh = React.useRef()
-  const [hovered, setHovered] = React.useState(false)
-  const { nodes } = useGLTF('/models/githublogo-transformed.glb')
+type GLTFResult = GLTF & ObjectMap & {
+    nodes: {
+        GithubLogo: Mesh
+    }
+    materials: {
+        ['Material.001']: MeshStandardMaterial
+    }
+}
 
-  const defaultScale = 0.75
-  const hoveredScale = 0.8
+export function GithubLogo(props: Position) {
+    const mesh = React.useRef<Mesh>(null!)
+    const [hovered, setHovered] = React.useState(false)
+    const {nodes, materials} = useGLTF('/models/githublogo-transformed.glb') as GLTFResult
 
-  useFrame(() => {
-    mesh.current.rotation.y += 0.015
-  })
+    const defaultScale = 0.75
+    const hoveredScale = 0.8
 
-  return (
-    <group dispose={null} position={position} scale={hovered ? hoveredScale : defaultScale} ref={mesh}
-      onPointerOver={(event) => setHovered(true)}
-      onPointerOut={(event) => setHovered(false)}
-      onClick={()=>window.open("https://github.com/j-xsen", "_blank")}>
-      <mesh geometry={nodes.GithubLogo.geometry}>
-        <meshBasicMaterial color={hovered ? [.5,.5,.5] : [1,1,1]} />
-      </mesh>
-      <mesh>
-        <boxGeometry args={[5,5,1]}/>
-        <meshBasicMaterial visible={false} />
-      </mesh>
-    </group>
-  )
+    useFrame(() => {
+        mesh.current.rotation.y += 0.015
+    })
+
+    return (
+        <group dispose={null} position={props.position} scale={hovered ? hoveredScale : defaultScale} ref={mesh}
+               onPointerOver={(event) => setHovered(true)}
+               onPointerOut={(event) => setHovered(false)}
+               onClick={() => window.open("https://github.com/j-xsen", "_blank")}>
+            <mesh geometry={nodes.GithubLogo.geometry}>
+                <meshBasicMaterial color={hovered ? [.5, .5, .5] : [1, 1, 1]}/>
+            </mesh>
+            <mesh>
+                <boxGeometry args={[5, 5, 1]}/>
+                <meshBasicMaterial visible={false}/>
+            </mesh>
+        </group>
+    )
 }
 
 useGLTF.preload('/models/githublogo-transformed.glb')

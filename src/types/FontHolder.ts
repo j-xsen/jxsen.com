@@ -1,4 +1,4 @@
-import {Font} from "three-stdlib";
+import {Font} from "three/examples/jsm/loaders/FontLoader";
 
 type FontHolder = {
     font: Font

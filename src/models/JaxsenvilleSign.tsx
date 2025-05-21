@@ -5,48 +5,72 @@ Files: jaxsenvillesign.glb [495.69KB] > Z:\art\models\jaxsenvillesign\jaxsenvill
 */
 
 import React from 'react'
-import { useGLTF } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
+import {useGLTF} from '@react-three/drei'
+import {ObjectMap, useFrame} from '@react-three/fiber'
+import {GLTF} from "three-stdlib";
+import {Mesh, MeshStandardMaterial, MeshPhysicalMaterial} from "three";
+import Transformation from "../types/Transformation";
 
-export function JaxsenvilleSign(props) {
-  const { nodes, materials } = useGLTF('/models/jaxsenvillesign-transformed.glb')
-  const mesh = React.useRef()
-  const [rotatingLeft, setRotatingLeft] = React.useState(true)
-  const [hovered, setHovered] = React.useState(false)
   const speed = 0.0055
   const maxRotation = 0.4
-  const defaultScale = 0.65
-  const hoveredScale = 0.7
-    
-  useFrame(() => {
-    if (rotatingLeft) {
-        mesh.current.rotation.y -= speed
-        if ( mesh.current.rotation.y <= -maxRotation) {
-            setRotatingLeft(false)
-        }
-    } else {
-        mesh.current.rotation.y += speed
-        if ( mesh.current.rotation.y >= maxRotation) {
-            setRotatingLeft(true)
-        }
+type GLTFResult = GLTF & ObjectMap & {
+    nodes: {
+        Cube: Mesh
+        Cube_1: Mesh
+        Cube001: Mesh
+        Cube001_1: Mesh
+        roof: Mesh
+        Cube004: Mesh
+        Cube004_1: Mesh
     }
-    mesh.current.rotation.y 
-  })
+    materials: {
+        PaletteMaterial001: MeshStandardMaterial
+        PaletteMaterial002: MeshStandardMaterial
+        PaletteMaterial003: MeshPhysicalMaterial
+        PaletteMaterial004: MeshStandardMaterial
+        PaletteMaterial005: MeshStandardMaterial
+    }
+}
 
-  return (
-    <group {...props} dispose={null} ref={mesh} scale={hovered ? hoveredScale : defaultScale}
-    onPointerOver={(event) => setHovered(true)}
-    onPointerOut={(event) => setHovered(false)}
-    onClick={()=>window.open("https://jaxsenville.com/", "_blank")}>
-      <mesh geometry={nodes.roof.geometry} material={materials.PaletteMaterial003} />
-      <mesh geometry={nodes.Cube.geometry} material={materials.PaletteMaterial001} />
-      <mesh geometry={nodes.Cube_1.geometry} material={materials.PaletteMaterial002} />
-      <mesh geometry={nodes.Cube001.geometry} material={materials.PaletteMaterial001} />
-      <mesh geometry={nodes.Cube001_1.geometry} material={materials.PaletteMaterial002} />
-      <mesh geometry={nodes.Cube004.geometry} material={materials.PaletteMaterial004} />
-      <mesh geometry={nodes.Cube004_1.geometry} material={materials.PaletteMaterial005} />
-    </group>
-  )
+export function JaxsenvilleSign(props: Transformation) {
+    const {nodes, materials} = useGLTF('/models/jaxsenvillesign-transformed.glb') as GLTFResult
+    const mesh = React.useRef<Mesh>(null!)
+    const [rotatingLeft, setRotatingLeft] = React.useState(true)
+    const [hovered, setHovered] = React.useState(false)
+    const speed = 0.0055
+    const maxRotation = 0.4
+    const defaultScale = 0.65
+    const hoveredScale = 0.7
+
+    useFrame(() => {
+        if (rotatingLeft) {
+            mesh.current.rotation.y -= speed
+            if (mesh.current.rotation.y <= -maxRotation) {
+                setRotatingLeft(false)
+            }
+        } else {
+            mesh.current.rotation.y += speed
+            if (mesh.current.rotation.y >= maxRotation) {
+                setRotatingLeft(true)
+            }
+        }
+        // mesh.current.rotation.y
+    })
+
+    return (
+        <group {...props} dispose={null} ref={mesh} scale={hovered ? hoveredScale : defaultScale}
+               onPointerOver={(event) => setHovered(true)}
+               onPointerOut={(event) => setHovered(false)}
+               onClick={() => window.open("https://jaxsenville.com/", "_blank")}>
+            <mesh geometry={nodes.roof.geometry} material={materials.PaletteMaterial003}/>
+            <mesh geometry={nodes.Cube.geometry} material={materials.PaletteMaterial001}/>
+            <mesh geometry={nodes.Cube_1.geometry} material={materials.PaletteMaterial002}/>
+            <mesh geometry={nodes.Cube001.geometry} material={materials.PaletteMaterial001}/>
+            <mesh geometry={nodes.Cube001_1.geometry} material={materials.PaletteMaterial002}/>
+            <mesh geometry={nodes.Cube004.geometry} material={materials.PaletteMaterial004}/>
+            <mesh geometry={nodes.Cube004_1.geometry} material={materials.PaletteMaterial005}/>
+        </group>
+    )
 }
 
 useGLTF.preload('/models/jaxsenvillesign-transformed.glb')

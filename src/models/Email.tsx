@@ -8,14 +8,13 @@ import React from 'react'
 import {useGLTF} from '@react-three/drei'
 import WordMesh from "../WordMesh";
 import {Vector3, Mesh, MeshStandardMaterial} from "three";
-import {useFrame} from "@react-three/fiber";
-import {useRef} from "react";
+import {ObjectMap, useFrame} from "@react-three/fiber";
 import Transformation from "../types/Transformation";
 import {GLTF} from "three-stdlib";
 import FontHolder from "../types/FontHolder";
 
 
-type GLTFResult = GLTF & {
+type GLTFResult = GLTF & ObjectMap & {
     nodes: {
         Cube: Mesh
     }
@@ -26,8 +25,7 @@ type GLTFResult = GLTF & {
 
 
 export function Email(props: Transformation & FontHolder) {
-    // const mesh = React.useRef()
-    const mesh = useRef<Mesh>(null!)
+    const mesh = React.useRef<Mesh>(null!)
     const {nodes, materials} = useGLTF('/models/email-transformed.glb') as GLTFResult
     const [hovered, setHovered] = React.useState(false)
 
@@ -44,7 +42,7 @@ export function Email(props: Transformation & FontHolder) {
         }
     })
 
-    return (<>
+    return <>
             <group {...props} ref={mesh} dispose={null}
                    onPointerOver={() => setHovered(true)}
                    onPointerOut={() => setHovered(false)}
@@ -61,7 +59,6 @@ export function Email(props: Transformation & FontHolder) {
                                   font={props.font}
                                   word="jaxsen,@,,jxsen,.,c,o,m"/>}
         </>
-    )
 }
 
 useGLTF.preload('/models/email-transformed.glb')
