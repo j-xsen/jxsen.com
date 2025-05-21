@@ -4,11 +4,11 @@ Command: npx gltfjsx@6.5.3 githublogo.glb --transform
 Files: githublogo.glb [20.01KB] > Z:\art\models\githublogo\githublogo-transformed.glb [2.41KB] (88%)
 */
 
-import React from 'react'
+import {useRef, useState} from 'react'
 import {useGLTF} from '@react-three/drei'
 import {ObjectMap, useFrame} from '@react-three/fiber'
 import {GLTF} from "three-stdlib";
-import {MeshStandardMaterial, Mesh} from "three";
+import {Mesh, MeshStandardMaterial} from "three";
 import {Position} from "../types/Transformation";
 
 type GLTFResult = GLTF & ObjectMap & {
@@ -21,8 +21,8 @@ type GLTFResult = GLTF & ObjectMap & {
 }
 
 export function GithubLogo(props: Position) {
-    const mesh = React.useRef<Mesh>(null!)
-    const [hovered, setHovered] = React.useState(false)
+    const mesh = useRef<Mesh>(null!)
+    const [hovered, setHovered] = useState(false)
     const {nodes, materials} = useGLTF('/models/githublogo-transformed.glb') as GLTFResult
 
     const defaultScale = 0.75

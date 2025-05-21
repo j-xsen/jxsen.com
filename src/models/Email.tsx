@@ -7,7 +7,7 @@ Files: email.glb [9.85KB] > Z:\coding\jxsen_2025\public\models\email-transformed
 import React from 'react'
 import {useGLTF} from '@react-three/drei'
 import WordMesh from "../WordMesh";
-import {Vector3, Mesh, MeshStandardMaterial} from "three";
+import {Mesh, MeshStandardMaterial, Vector3} from "three";
 import {ObjectMap, useFrame} from "@react-three/fiber";
 import Transformation from "../types/Transformation";
 import {GLTF} from "three-stdlib";
@@ -43,22 +43,22 @@ export function Email(props: Transformation & FontHolder) {
     })
 
     return <>
-            <group {...props} ref={mesh} dispose={null}
-                   onPointerOver={() => setHovered(true)}
-                   onPointerOut={() => setHovered(false)}
-                   onClick={() => window.open("mailto:jaxsen@jxsen.com", "_blank")}>
+        <group {...props} ref={mesh} dispose={null}
+               onPointerOver={() => setHovered(true)}
+               onPointerOut={() => setHovered(false)}
+               onClick={() => window.open("mailto:jaxsen@jxsen.com", "_blank")}>
 
-                <mesh geometry={nodes.Cube.geometry} material={materials.Material}/>
-                <mesh>
-                    <boxGeometry args={[6, 4, 1]}/>
-                    <meshBasicMaterial visible={false}/>
-                </mesh>
-            </group>
+            <mesh geometry={nodes.Cube.geometry} material={materials.Material}/>
+            <mesh>
+                <boxGeometry args={[6, 4, 1]}/>
+                <meshBasicMaterial visible={false}/>
+            </mesh>
+        </group>
 
-            {hovered && <WordMesh center={new Vector3(0, -11, 6)}
-                                  font={props.font}
-                                  word="jaxsen,@,,jxsen,.,c,o,m"/>}
-        </>
+        {hovered && <WordMesh center={new Vector3(0, -11, 6)}
+                              font={props.font}
+                              word="jaxsen,@,,jxsen,.,c,o,m"/>}
+    </>
 }
 
 useGLTF.preload('/models/email-transformed.glb')

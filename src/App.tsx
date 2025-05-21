@@ -1,6 +1,6 @@
 import {Canvas} from "@react-three/fiber"
 import {OrbitControls} from "@react-three/drei"
-import {FontLoader,Font} from "three/examples/jsm/loaders/FontLoader"
+import {Font, FontLoader} from "three/examples/jsm/loaders/FontLoader"
 import WordMesh from "./WordMesh"
 import helvetiker from "../helvetiker_regular.typeface.json"
 import {GithubLogo} from "./models/GithubLogo"

@@ -4,15 +4,13 @@ Command: npx gltfjsx@6.5.3 jaxsenvillesign.glb --transform
 Files: jaxsenvillesign.glb [495.69KB] > Z:\art\models\jaxsenvillesign\jaxsenvillesign-transformed.glb [35.21KB] (93%)
 */
 
-import React from 'react'
+import {useRef, useState} from 'react'
 import {useGLTF} from '@react-three/drei'
 import {ObjectMap, useFrame} from '@react-three/fiber'
 import {GLTF} from "three-stdlib";
-import {Mesh, MeshStandardMaterial, MeshPhysicalMaterial} from "three";
+import {Mesh, MeshPhysicalMaterial, MeshStandardMaterial} from "three";
 import Transformation from "../types/Transformation";
 
-  const speed = 0.0055
-  const maxRotation = 0.4
 type GLTFResult = GLTF & ObjectMap & {
     nodes: {
         Cube: Mesh
@@ -34,9 +32,9 @@ type GLTFResult = GLTF & ObjectMap & {
 
 export function JaxsenvilleSign(props: Transformation) {
     const {nodes, materials} = useGLTF('/models/jaxsenvillesign-transformed.glb') as GLTFResult
-    const mesh = React.useRef<Mesh>(null!)
-    const [rotatingLeft, setRotatingLeft] = React.useState(true)
-    const [hovered, setHovered] = React.useState(false)
+    const mesh = useRef<Mesh>(null!)
+    const [rotatingLeft, setRotatingLeft] = useState(true)
+    const [hovered, setHovered] = useState(false)
     const speed = 0.0055
     const maxRotation = 0.4
     const defaultScale = 0.65
