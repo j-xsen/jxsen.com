@@ -7,6 +7,7 @@ import {GithubLogo} from "./models/GithubLogo"
 import {JaxsenvilleSign} from "./models/JaxsenvilleSign"
 import {Email} from "./models/Email"
 import {Euler, Vector3} from "three";
+import {Jaxsen} from "./models/Jaxsen";
 
 export default function App() {
     const loader = new FontLoader();
@@ -24,6 +25,8 @@ export default function App() {
                    font={font}
                    rotation={new Euler(0, 100, 50)}
                    scale={0.75}/>
+
+            <Jaxsen position={new Vector3(3, -19, 20)} rotation={new Euler(0, Math.PI*1.1, 0)} scale={5}/>
 
             <OrbitControls/>
 
