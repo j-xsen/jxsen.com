@@ -33,7 +33,7 @@ export default function App() {
                 <directionalLight position={[0, 4, 10]} intensity={0.75} color={[1, 1, 1]}/>
 
                 <A11y role={"link"} description={"Jaxsenville website"} href={"https://jaxsenville.com"}
-                      actionCall={() => openLink("https://jaxsenville.com")}>
+                      actionCall={() => openLink("https://jaxsenville.com/?utm_source=jxsen.com&utm_medium=banner&utm_campaign=Jaxsenation&utm_content=jxsen-Jaxsenville-Sign")}>
                     <JaxsenvilleSign position={new Vector3(0, -5, 0)}
                                      rotation={new Euler(24.75, 0, 0)}
                                      scale={0.65}/>
