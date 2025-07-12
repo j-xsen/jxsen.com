@@ -9,6 +9,7 @@ import {Email} from "./models/Email"
 import {Euler, Vector3} from "three";
 import {Jaxsen} from "./models/Jaxsen";
 import {A11y, A11yAnnouncer} from "@react-three/a11y";
+import {Burger} from "./models/Burger";
 
 export default function App() {
     const loader = new FontLoader();
@@ -37,6 +38,14 @@ export default function App() {
                     <JaxsenvilleSign position={new Vector3(0, -5, 0)}
                                      rotation={new Euler(24.75, 0, 0)}
                                      scale={0.65}/>
+                </A11y>
+
+                <A11y role={"link"} description={"Burga Flipper 2"} href={"https://burga-flipper-2.vercel.app/"}
+                      actionCall={() => openLink("https://burga-flipper-2.vercel.app/")}>
+                    <Burger rotation={new Euler(0, 0, 0)}
+                            position={new Vector3(6, -4, -4)}
+                            scale={2.5}
+                            font={font}/>
                 </A11y>
 
                 <A11y role={"link"} description={"Email Jaxsen Honeycutt"} href={"mailto:jaxsen@jxsen.com"}
