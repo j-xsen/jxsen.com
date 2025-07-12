@@ -28,7 +28,9 @@ export default function App() {
 
                 <A11y role={"link"} actionCall={() => openLink("https://github.com/j-xsen")}
                       description={"Jaxsen Honeycutt's GitHub"} href={"https://github.com/j-xsen"}>
-                    <GithubLogo position={new Vector3(0, 6, -5)}/>
+                    <GithubLogo
+                        font={font}
+                        position={new Vector3(0, 6, -5)}/>
                 </A11y>
 
                 <directionalLight position={[0, 4, 10]} intensity={0.75} color={[1, 1, 1]}/>
@@ -37,7 +39,8 @@ export default function App() {
                       actionCall={() => openLink("https://jaxsenville.com/?utm_source=jxsen.com&utm_medium=banner&utm_campaign=Jaxsenation&utm_content=jxsen-Jaxsenville-Sign")}>
                     <JaxsenvilleSign position={new Vector3(0, -5, 0)}
                                      rotation={new Euler(24.75, 0, 0)}
-                                     scale={0.65}/>
+                                     scale={0.65}
+                                     font={font}/>
                 </A11y>
 
                 <A11y role={"link"} description={"Burga Flipper 2"} href={"https://burga-flipper-2.vercel.app/"}

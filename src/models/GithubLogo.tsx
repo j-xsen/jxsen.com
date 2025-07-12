@@ -8,8 +8,10 @@ import {useRef, useState} from 'react'
 import {useGLTF} from '@react-three/drei'
 import {ObjectMap, useFrame} from '@react-three/fiber'
 import {GLTF} from "three-stdlib";
-import {Mesh, MeshStandardMaterial} from "three";
+import {Mesh, MeshStandardMaterial, Vector3} from "three";
 import {Position} from "../types/Transformation";
+import WordMesh from "../WordMesh";
+import FontHolder from "../types/FontHolder";
 
 type GLTFResult = GLTF & ObjectMap & {
     nodes: {
@@ -20,7 +22,7 @@ type GLTFResult = GLTF & ObjectMap & {
     }
 }
 
-export function GithubLogo(props: Position) {
+export function GithubLogo(props: Position & FontHolder) {
     const mesh = useRef<Mesh>(null!)
     const [hovered, setHovered] = useState(false)
     const {nodes, materials} = useGLTF('/models/githublogo-transformed.glb') as GLTFResult
@@ -32,7 +34,7 @@ export function GithubLogo(props: Position) {
         mesh.current.rotation.y += 0.015
     })
 
-    return (
+    return (<>
         <group dispose={null} position={props.position} scale={hovered ? hoveredScale : defaultScale} ref={mesh}
                onPointerOver={(event) => setHovered(true)}
                onPointerOut={(event) => setHovered(false)}
@@ -45,6 +47,9 @@ export function GithubLogo(props: Position) {
                 <meshBasicMaterial visible={false}/>
             </mesh>
         </group>
+    {hovered && <WordMesh center={new Vector3(0, -11, 6)}
+                          font={props.font}
+                          word="G,it,Hub/j-xsen"/>}</>
     )
 }
 

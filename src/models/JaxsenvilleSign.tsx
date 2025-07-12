@@ -8,8 +8,10 @@ import {useRef, useState} from 'react'
 import {useGLTF} from '@react-three/drei'
 import {ObjectMap, useFrame} from '@react-three/fiber'
 import {GLTF} from "three-stdlib";
-import {Mesh, MeshPhysicalMaterial, MeshStandardMaterial} from "three";
+import {Mesh, MeshPhysicalMaterial, MeshStandardMaterial, Vector3} from "three";
 import Transformation from "../types/Transformation";
+import WordMesh from "../WordMesh";
+import FontHolder from "../types/FontHolder";
 
 type GLTFResult = GLTF & ObjectMap & {
     nodes: {
@@ -30,7 +32,7 @@ type GLTFResult = GLTF & ObjectMap & {
     }
 }
 
-export function JaxsenvilleSign(props: Transformation) {
+export function JaxsenvilleSign(props: Transformation & FontHolder) {
     const {nodes, materials} = useGLTF('/models/jaxsenvillesign-transformed.glb') as GLTFResult
     const mesh = useRef<Mesh>(null!)
     const [rotatingLeft, setRotatingLeft] = useState(true)
@@ -55,7 +57,7 @@ export function JaxsenvilleSign(props: Transformation) {
         // mesh.current.rotation.y
     })
 
-    return (
+    return (<>
         <group {...props} dispose={null} ref={mesh} scale={hovered ? hoveredScale : defaultScale}
                onPointerOver={(event) => setHovered(true)}
                onPointerOut={(event) => setHovered(false)}
@@ -68,6 +70,9 @@ export function JaxsenvilleSign(props: Transformation) {
             <mesh geometry={nodes.Cube004.geometry} material={materials.PaletteMaterial004}/>
             <mesh geometry={nodes.Cube004_1.geometry} material={materials.PaletteMaterial005}/>
         </group>
+    {hovered && <WordMesh center={new Vector3(0, -11, 6)}
+                          font={props.font}
+                          word="Jaxsenville.com"/>}</>
     )
 }
 
