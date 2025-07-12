@@ -10,6 +10,7 @@ import {Euler, Vector3} from "three";
 import {Jaxsen} from "./models/Jaxsen";
 import {A11y, A11yAnnouncer} from "@react-three/a11y";
 import {Burger} from "./models/Burger";
+import {Suspense} from "react"
 
 export default function App() {
     const loader = new FontLoader();
@@ -19,7 +20,18 @@ export default function App() {
         window.open(url, "_blank")
     }
 
-    return (<>
+    return (<Suspense fallback={<div
+            style={{
+                fontSize: "4em",
+                fontWeight: "700",
+                letterSpacing: "0.05em",
+                lineHeight: "1.1",
+                fontFamily: "'Inter', sans-serif",
+                textAlign: "center"
+            }}
+        ><h1>
+            Jaxsen Honeycutt
+        </h1><p style={{fontSize:"0.5em"}}>Loading...</p></div>}>
             <Canvas camera={{position: [0, 0, 12], fov: 90}}>
 
                 <A11y role={"content"} description={"Jaxsen Honeycutt"}>
@@ -67,6 +79,6 @@ export default function App() {
 
             </Canvas>
             <A11yAnnouncer/>
-        </>
+        </Suspense>
     )
 }

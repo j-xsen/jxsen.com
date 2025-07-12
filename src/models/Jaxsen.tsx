@@ -5,7 +5,7 @@ Files: jaxsen.glb [8.48MB] > Z:\art\models\jaxsen\jaxsen-transformed.glb [711.79
 */
 
 import * as THREE from 'three'
-import React, {useEffect, useRef} from 'react'
+import React, {Suspense, useEffect, useRef} from 'react'
 import {SpotLight, useGLTF} from '@react-three/drei'
 import {GLTF} from 'three-stdlib'
 import {ObjectMap, useFrame} from "@react-three/fiber";
@@ -37,14 +37,14 @@ export function Jaxsen(props: Transformation) {
 
 
     return (
-        <>
-            <group {...props} dispose={null}>
+        <Suspense fallback={<></>}>
+        <group {...props} dispose={null}>
                 <mesh geometry={nodes.Mesh_0.geometry} ref={mRef} material={materials.Material_0} scale={11.489}/>
                 <primitive object={targetRef.current} position={[0, 3, 0]} />
                 <SpotLight position={[0, 8, 5]} ref={spotRef} anglePower={5} intensity={500} scale={8} distance={75}
                                angle={Math.PI}/>
             </group>
-        </>
+        </Suspense>
     )
 }
 
