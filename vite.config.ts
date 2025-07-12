@@ -8,8 +8,8 @@ export default defineConfig({
             output: {
                 manualChunks:{
                     'react-vendor': ['react', 'react-dom'],
-                    'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
-                    'three-extras': ['three-stdlib', '@react-three/a11y']
+                    'three-vendor': ['three', '@react-three/fiber', '@react-three/drei', 'three-stdlib'],
+                    'three-extras': ['@react-three/a11y']
                 }
             }
         }
