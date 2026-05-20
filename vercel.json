@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/to/:slug", "destination": "/api/to/:slug" }
+  ],
+  "functions": {
+    "api/to/[slug].ts": {
+      "includeFiles": "links.json"
+    }
+  }
+}
