@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node"
-import links from "../../links.json"
+import links from "../../links.json" with { type: "json" }
 
 export default function handler(req: VercelRequest, res: VercelResponse) {
   const slug = req.query.slug as string
