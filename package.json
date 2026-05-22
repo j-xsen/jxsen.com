@@ -10,6 +10,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "packageManager": "pnpm@10.7.0",
   "dependencies": {
     "@react-three/a11y": "^3.0.0",
