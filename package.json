@@ -23,10 +23,10 @@
     "three-stdlib": "^2.36.0"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260616.1",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@types/three": "^0.174.0",
-    "@vercel/node": "^5.8.3",
     "typescript": "^5.8.3",
     "vite": "^6.3.5"
   }

@@ -1,0 +1,3 @@
+name = "jxsen-com"
+pages_build_output_dir = "dist"
+compatibility_date = "2025-01-01"
